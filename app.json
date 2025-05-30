@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "mobile-habbit-tracker",
-    "slug": "mobile-habbit-tracker",
+    "name": "mobile-habit-tracker",
+    "slug": "mobile-habit-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "mobilehabbittracker",
+    "scheme": "mobilehabittracker",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
