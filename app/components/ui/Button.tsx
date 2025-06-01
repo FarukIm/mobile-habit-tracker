@@ -18,6 +18,7 @@ export default function Button({ title, onPress, disabled }: ButtonProps) {
 				width: '100%',
 				borderWidth: 1,
 				borderColor: disabled ? theme.colors.light : theme.colors.cyan,
+				borderRadius: 8,
 			}}>
 			<Pressable
 				onPress={onPress}
@@ -30,8 +31,11 @@ export default function Button({ title, onPress, disabled }: ButtonProps) {
 					width: '100%',
 					backgroundColor: disabled ? theme.colors.gray : theme.colors.blue,
 					padding: 10,
+					borderRadius: 8,
 				}}>
-				<Text style={{ fontSize: 16, color: disabled ? theme.colors.dark : theme.colors.light, fontWeight: 'bold' }}>{title}</Text>
+				<Text style={{ fontSize: 16, color: disabled ? theme.colors.dark : theme.colors.light, fontWeight: 'bold' }}>
+					{title}
+				</Text>
 			</Pressable>
 		</View>
 	);
