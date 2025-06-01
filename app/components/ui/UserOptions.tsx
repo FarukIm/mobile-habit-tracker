@@ -9,7 +9,7 @@ export default function UserOptions() {
 	const router = useRouter();
 
 	const handleProfilePress = () => {
-		router.push('/registration');
+		router.push('/profile');
 		setMenuVisible(false);
 	};
 

@@ -54,6 +54,7 @@ export default function Input({
 				) : (
 					<TextInput
 						placeholder={placeholder}
+						value={value}
 						style={styles.input}
 						placeholderTextColor="#999"
 						multiline={multiLine}
