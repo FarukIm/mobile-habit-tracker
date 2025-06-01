@@ -1,5 +1,6 @@
 import theme from '@/theme';
 import { AntDesign } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -8,18 +9,19 @@ const SMALL: Variant = 'small';
 const LARGE: Variant = 'large';
 
 type CardProps = {
+	id: number;
 	title: string;
 	time: string;
 	description?: string;
-  variant?: Variant;
+	variant?: Variant;
 	onCheckPress?: () => void;
 };
 
-const LargeCard = (title: string, time: string, description: string, onCheckPress: () => void) => {
+const LargeCard = (id: number, title: string, time: string, description: string, onCheckPress: () => void) => {
 	const [expanded, setExpanded] = useState(false);
 
-  return (
-    <View style={styles.card}>
+	return (
+		<TouchableOpacity style={styles.card} onPress={() => router.push({ pathname: `/habit`, params: { id } })}>
 			<View style={styles.header}>
 				<View>
 					<Text style={styles.title}>{title}</Text>
@@ -34,24 +36,25 @@ const LargeCard = (title: string, time: string, description: string, onCheckPres
 					{description}
 				</Text>
 			</TouchableOpacity>
-		</View>
-  )
+		</TouchableOpacity>
+	);
 };
 
-const SmallCard = (title: string, time: string) => {
-  return(
-    <View style={styles.card}>
-      <View style={styles.header}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.time}>{time}</Text>
-      </View>
-    </View>
-  )
-}
+const SmallCard = (id: number, title: string, time: string) => {
+	return (
+		<TouchableOpacity style={styles.card} onPress={() => router.push({ pathname: `/habit`, params: { id } })}>
+			<View style={styles.header}>
+				<Text style={styles.title}>{title}</Text>
+				<Text style={styles.time}>{time}</Text>
+			</View>
+		</TouchableOpacity>
+	);
+};
 
-export default function HabitCard({ title, time, description, variant=SMALL, onCheckPress }: CardProps) {
-
-	return 	variant === SMALL ? SmallCard(title, time) : LargeCard(title, time, description="", onCheckPress= () => {});
+export default function HabitCard({ id, title, time, description = '', variant = SMALL, onCheckPress }: CardProps) {
+	return variant === SMALL
+		? SmallCard(id, title, time)
+		: LargeCard(id, title, time, description, (onCheckPress = () => {}));
 }
 
 const styles = StyleSheet.create({

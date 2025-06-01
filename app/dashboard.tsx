@@ -1,5 +1,6 @@
 import theme from '@/theme';
 import { AntDesign } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
@@ -11,9 +12,9 @@ export default function Dashboard() {
 
 	return (
 		<ScrollView style={styles.screenContainer}>
+      
 			<View style={styles.titleContainer}>
 				<Text style={styles.title}>Dashboard</Text>
-
 				<TouchableOpacity style={styles.profileContainer}>
 					<AntDesign name="user" size={24} color="black" />
 				</TouchableOpacity>
@@ -22,12 +23,13 @@ export default function Dashboard() {
 			<View style={{ ...styles.habitsContainer, backgroundColor: theme.colors.lightBlue }}>
 				<View style={styles.habitsTitleContainer}>
 					<Text style={styles.activeHabitsLabel}>Today</Text>
-					<TouchableOpacity style={styles.addHabitButton}>
+					<TouchableOpacity style={styles.addHabitButton} onPress={() => router.push('/create-habit')}>
 						<AntDesign name="pluscircleo" size={16} color={theme.colors.dark} />
 						<Text style={styles.addHabitLabel}>Add</Text>
 					</TouchableOpacity>
 				</View>
 				<HabitCard
+					id={1}
 					variant="large"
 					title="Habit 1"
 					time="9:00 AM"
@@ -35,6 +37,7 @@ export default function Dashboard() {
 					onCheckPress={() => {}}
 				/>
 				<HabitCard
+					id={2}
 					variant="large"
 					title="Habit 1"
 					time="9:00 AM"
@@ -42,6 +45,7 @@ export default function Dashboard() {
 					onCheckPress={() => {}}
 				/>
 				<HabitCard
+					id={3}
 					variant="large"
 					title="Habit 1"
 					time="9:00 AM"
@@ -65,16 +69,16 @@ export default function Dashboard() {
 			/>
 
 			<View style={{ ...styles.habitsContainer, backgroundColor: theme.colors.lightYellow, marginBottom: 50 }}>
-        <View style={styles.habitsTitleContainer}>
-				<Text style={styles.activeHabitsLabel}>April 23 2025</Text>
-					<TouchableOpacity style={styles.addHabitButton}>
+				<View style={styles.habitsTitleContainer}>
+					<Text style={styles.activeHabitsLabel}>April 23 2025</Text>
+					<TouchableOpacity style={styles.addHabitButton} onPress={() => router.push('/create-habit')}>
 						<AntDesign name="pluscircleo" size={16} color={theme.colors.dark} />
 						<Text style={styles.addHabitLabel}>Add</Text>
 					</TouchableOpacity>
 				</View>
-				<HabitCard title="Habit 1" time="9:00 AM" />
-				<HabitCard title="Habit 1" time="9:00 AM" />
-				<HabitCard title="Habit 1" time="9:00 AM" />
+				<HabitCard id={4} title="Habit 1" time="9:00 AM" />
+				<HabitCard id={5} title="Habit 1" time="9:00 AM" />
+				<HabitCard id={6} title="Habit 1" time="9:00 AM" />
 			</View>
 		</ScrollView>
 	);
@@ -91,7 +95,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		marginTop: 50,
-
 		backgroundColor: 'white',
 		padding: 10,
 		borderRadius: 8,
@@ -115,34 +118,34 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderRadius: 8,
 	},
-  habitsTitleContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
+	habitsTitleContainer: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		width: '100%',
 		borderBottomWidth: 1,
 		borderBottomColor: theme.colors.gray,
 		marginBottom: 4,
-    paddingBottom: 6
-  },
-  addHabitButton: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 5,
-    padding: 5,
-    borderRadius: 8,
-    borderWidth: 2,
-    borderColor: theme.colors.gray,
-    backgroundColor: 'white',
-  },
-  addHabitLabel: {
-    fontSize: 16,
-    fontWeight: 500,
-    color: 'black', 
-  },
+		paddingBottom: 6,
+	},
+	addHabitButton: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+		gap: 5,
+		padding: 5,
+		borderRadius: 8,
+		borderWidth: 2,
+		borderColor: theme.colors.gray,
+		backgroundColor: 'white',
+	},
+	addHabitLabel: {
+		fontSize: 16,
+		fontWeight: 500,
+		color: 'black',
+	},
 	activeHabitsLabel: {
 		fontSize: 20,
 		fontWeight: 'bold',
