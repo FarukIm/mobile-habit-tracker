@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Button from './Button';
-import CustomTextInput from './CustomTextInput';
+import Input from './Input';
 
 interface WeekdayOption {
 	id: number;
@@ -60,9 +60,9 @@ export default function HabitForm({ onSubmit, initialValues = {} }: HabitFormPro
 	return (
 		<View>
 			<View style={styles.container}>
-				<CustomTextInput label="Title" value={title} setValue={setTitle} />
+				<Input label="Title" value={title} setValue={setTitle} />
 
-				<CustomTextInput label="Description" multiline={true} value={description} setValue={setDescription} />
+				<Input label="Description" multiline={true} value={description} setValue={setDescription} />
 
 				<Text style={styles.label}>Repeat on</Text>
 				<View style={styles.weekdaysContainer}>

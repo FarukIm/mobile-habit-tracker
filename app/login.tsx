@@ -6,7 +6,7 @@ import theme from '@/theme';
 // components
 import { SafeAreaView, Text } from 'react-native';
 import Button from './components/ui/Button';
-import CustomTextInput from './components/ui/CustomTextInput';
+import Input from './components/ui/Input';
 
 export default function Registration() {
 	const [email, setEmail] = useState('');
@@ -15,14 +15,14 @@ export default function Registration() {
 	return (
 		<SafeAreaView style={{ flex: 1, padding: 20, justifyContent: 'center', alignItems: 'center', gap: 20 }}>
 			<Text style={{ fontSize: 26, marginBottom: 20, fontWeight: 'bold', color: theme.colors.red }}>Log In</Text>
-			<CustomTextInput
+			<Input
         label="Email"
 				placeholder="Email"
 				value={email}
 				setValue={setEmail}
 			/>
 
-      <CustomTextInput
+      <Input
         label="Password"
         placeholder="Password"
         value={password}

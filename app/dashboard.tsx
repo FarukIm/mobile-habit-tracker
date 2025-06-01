@@ -6,6 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { ScrollView } from 'react-native-gesture-handler';
 import HabitCard from './components/ui/HabitCard';
+import UserOptions from './components/ui/UserOptions';
 
 export default function Dashboard() {
 	const [selected, setSelected] = useState('');
@@ -15,9 +16,7 @@ export default function Dashboard() {
       
 			<View style={styles.titleContainer}>
 				<Text style={styles.title}>Dashboard</Text>
-				<TouchableOpacity style={styles.profileContainer}>
-					<AntDesign name="user" size={24} color="black" />
-				</TouchableOpacity>
+				<UserOptions />
 			</View>
 
 			<View style={{ ...styles.habitsContainer, backgroundColor: theme.colors.lightBlue }}>
@@ -103,12 +102,6 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		fontWeight: 'bold',
 		color: theme.colors.dark,
-	},
-	profileContainer: {
-		padding: 5,
-		borderRadius: 100,
-		borderWidth: 2,
-		borderColor: theme.colors.dark,
 	},
 	habitsContainer: {
 		display: 'flex',
