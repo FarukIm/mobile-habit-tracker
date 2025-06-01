@@ -21,7 +21,7 @@ const LargeCard = (id: number, title: string, time: string, description: string,
 	const [expanded, setExpanded] = useState(false);
 
 	return (
-		<TouchableOpacity style={styles.card} onPress={() => router.push({ pathname: `/habit`, params: { id } })}>
+		<TouchableOpacity style={styles.card} onPress={() => router.push({ pathname: `/habit`, params: { id: id } })}>
 			<View style={styles.header}>
 				<View>
 					<Text style={styles.title}>{title}</Text>

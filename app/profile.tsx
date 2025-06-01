@@ -2,7 +2,7 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
 // enums
-import { InputTypes } from '@/app/types/enums/input';
+import InputTypes from '@/app/types/enums/input';
 // theme
 import theme from '@/theme';
 // icons

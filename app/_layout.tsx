@@ -13,6 +13,7 @@ export default function RootLayout() {
 				<Stack.Screen name="profile" />
 				<Stack.Screen name="habit" />
 				<Stack.Screen name="create-habit" />
+				<Stack.Screen name="edit-habit" />
 				<Stack.Screen name="login" />
 				<Stack.Screen name="registration" />
 			</Stack>

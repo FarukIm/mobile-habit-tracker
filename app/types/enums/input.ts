@@ -9,5 +9,6 @@ enum InputTypes {
 	URL = "url",
 	DATE = "date",
 }
-export { InputTypes };
+
+export default InputTypes;
 

@@ -1,19 +1,22 @@
-import theme from '@/theme';
+// libs
 import { AntDesign } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Calendar } from 'react-native-calendars';
+import { Calendar, CalendarProvider, ExpandableCalendar } from 'react-native-calendars';
 import { ScrollView } from 'react-native-gesture-handler';
+// theme
+import theme from '@/theme';
+// components
 import HabitCard from './components/ui/HabitCard';
 import UserOptions from './components/ui/UserOptions';
 
 export default function Dashboard() {
-	const [selected, setSelected] = useState('');
+	const [selected, setSelected] = useState(new Date().toISOString().split('T')[0]);
+	const [viewType, setViewType] = useState('monthly');
 
 	return (
 		<ScrollView style={styles.screenContainer}>
-      
 			<View style={styles.titleContainer}>
 				<Text style={styles.title}>Dashboard</Text>
 				<UserOptions />
@@ -52,24 +55,69 @@ export default function Dashboard() {
 					onCheckPress={() => {}}
 				/>
 			</View>
-			<Calendar
-				onDayPress={(day) => {
-					setSelected(day.dateString);
-				}}
-				markedDates={{
-					[selected]: {
-						selected: true,
-						disableTouchEvent: true,
-						selectedColor: theme.colors.yellow,
-						selectedTextColor: theme.colors.dark,
-					},
-				}}
-				style={styles.calendar}
-			/>
 
-			<View style={{ ...styles.habitsContainer, backgroundColor: theme.colors.lightYellow, marginBottom: 50 }}>
+			<View style={styles.viewToggleContainer}>
+				<TouchableOpacity
+					style={[styles.viewToggleButton, viewType === 'monthly' && styles.activeViewButton]}
+					onPress={() => setViewType('monthly')}>
+					<Text style={styles.viewToggleText}>Monthly</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={[styles.viewToggleButton, viewType === 'weekly' && styles.activeViewButton]}
+					onPress={() => setViewType('weekly')}>
+					<Text style={styles.viewToggleText}>Weekly</Text>
+				</TouchableOpacity>
+			</View>
+
+			{viewType === 'monthly' ? (
+				<Calendar
+					current={selected}
+					onDayPress={(day) => {
+						setSelected(day.dateString);
+					}}
+					markedDates={{
+						[selected]: {
+							selected: true,
+							disableTouchEvent: true,
+							selectedColor: theme.colors.yellow,
+							selectedTextColor: theme.colors.dark,
+						},
+					}}
+					style={styles.calendar}
+				/>
+			) : (
+				<CalendarProvider
+					date={selected}
+					onDateChanged={(date) => setSelected(date)}
+					showTodayButton
+					disabledOpacity={0.6}>
+					<ExpandableCalendar
+						onDayPress={(day) => setSelected(day.dateString)}
+						firstDay={0}
+						hideKnob
+						disablePan
+						disableWeekScroll
+						closeOnDayPress={false}
+						style={styles.calendar}
+						markedDates={{
+							[selected]: {
+								selected: true,
+								selectedColor: theme.colors.pink,
+								selectedTextColor: theme.colors.dark,
+							},
+						}}
+						theme={{
+							todayTextColor: theme.colors.cyan,
+							selectedDayBackgroundColor: theme.colors.pink,
+							selectedDayTextColor: theme.colors.dark,
+						}}
+					/>
+				</CalendarProvider>
+			)}
+
+			<View style={{ ...styles.habitsContainer, backgroundColor: theme.colors.pink, marginBottom: 50 }}>
 				<View style={styles.habitsTitleContainer}>
-					<Text style={styles.activeHabitsLabel}>April 23 2025</Text>
+					<Text style={styles.activeHabitsLabel}>{selected}</Text>
 					<TouchableOpacity style={styles.addHabitButton} onPress={() => router.push('/create-habit')}>
 						<AntDesign name="pluscircleo" size={16} color={theme.colors.dark} />
 						<Text style={styles.addHabitLabel}>Add</Text>
@@ -101,7 +149,7 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 30,
 		fontWeight: 'bold',
-		color: theme.colors.dark,
+		color: theme.colors.red,
 	},
 	habitsContainer: {
 		display: 'flex',
@@ -144,10 +192,49 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: theme.colors.dark,
 	},
-	calendar: {
+	calendarContainer: {
 		width: '100%',
-		height: 400,
-		marginTop: 20,
+		display: 'flex',
+		flexDirection: 'column',
+		gap: 10,
+		backgroundColor: 'white',
+		padding: 10,
 		borderRadius: 8,
+		marginTop: 20,
+	},
+	calendar: {
+		borderEndEndRadius: 8,
+		borderStartEndRadius: 8,
+		elevation: 0,
+		shadowColor: 'transparent',
+		borderWidth: 0,
+	},
+	viewToggleContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: '100%',
+		marginTop: 20,
+		backgroundColor: 'white',
+		padding: 10,
+		borderStartStartRadius: 8,
+		borderEndStartRadius: 8,
+	},
+	viewToggleButton: {
+		width: '50%',
+		padding: 10,
+		marginHorizontal: 5,
+		borderRadius: 8,
+		backgroundColor: theme.colors.light,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	activeViewButton: {
+		backgroundColor: theme.colors.cyan,
+	},
+	viewToggleText: {
+		fontSize: 16,
+		fontWeight: 500,
 	},
 });
