@@ -15,6 +15,7 @@ export default function UserOptions() {
 
 	const handleLogoutPress = () => {
 		setMenuVisible(false);
+		router.push('/login');
 	};
 
 	return (

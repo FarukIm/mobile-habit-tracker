@@ -1,4 +1,4 @@
-import { InputTypes } from '@/app/types/enums/input';
+import InputTypes from '@/app/types/enums/input';
 import theme from '@/theme';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
